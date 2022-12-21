@@ -1,37 +1,18 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {ABOUT, HOME, SETTINGS} from '../constants/routeName';
+import {About} from '../screens/About';
+import {Home} from '../screens/Home';
+import {Settings} from '../screens/Settings';
 
 export const HomeNavigator = () => {
   const HomeStack = createStackNavigator();
 
-  const Contact = () => {
-    return (
-      <View>
-        <Text>Contact</Text>
-      </View>
-    );
-  };
-  const About = () => {
-    return (
-      <View>
-        <Text>About</Text>
-      </View>
-    );
-  };
-  const Settings = () => {
-    return (
-      <View>
-        <Text>Settings</Text>
-      </View>
-    );
-  };
-
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={Contact} />
-      <HomeStack.Screen name="About" component={About} />
-      <HomeStack.Screen name="Settings" component={Settings} />
+    <HomeStack.Navigator initialRouteName="Home">
+      <HomeStack.Screen name={HOME} component={Home} />
+      <HomeStack.Screen name={ABOUT} component={About} />
+      <HomeStack.Screen name={SETTINGS} component={Settings} />
     </HomeStack.Navigator>
   );
 };
