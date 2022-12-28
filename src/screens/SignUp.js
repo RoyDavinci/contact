@@ -1,11 +1,20 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {Container} from '../components/common/Container';
 import SignUpComponent from '../components/common/SignUp/SignUp';
+import URL from '../config/env';
+import register from '../context/actions/auth/register';
+import {GlobalContext} from '../context/Provider';
 
 export const SignUp = () => {
   const [form, setForm] = useState({});
   const [errors, setError] = useState({});
+  const {
+    authDispatch,
+    authState: {error, loading},
+  } = useContext(GlobalContext);
+
+  console.log(loading);
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
@@ -74,8 +83,16 @@ export const SignUp = () => {
         return {...prev, password: 'Please enter a password'};
       });
     }
+
+    if (
+      Object.values(form).length === 5 &&
+      Object.values(form).every(item => item.trim().length > 0) &&
+      Object.values(errors).every(item => !item)
+    ) {
+      console.log('object');
+      register(form)(authDispatch);
+    }
   };
-  console.log(errors, form);
 
   return (
     <Container>
@@ -85,6 +102,8 @@ export const SignUp = () => {
           onSubmit={onSubmit}
           form={form}
           errors={errors}
+          loading={loading}
+          error={error}
         />
       </View>
     </Container>

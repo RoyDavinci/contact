@@ -7,7 +7,14 @@ import styles from '../login/styles';
 import {useNavigation} from '@react-navigation/native';
 import {LOGIN} from '../../../constants/routeName';
 
-const SignUpComponent = ({onChange, onSubmit, form, errors}) => {
+const SignUpComponent = ({
+  onChange,
+  onSubmit,
+  form,
+  loading,
+  error,
+  errors,
+}) => {
   const {navigate} = useNavigation();
 
   return (
@@ -16,6 +23,7 @@ const SignUpComponent = ({onChange, onSubmit, form, errors}) => {
       <View>
         <Text style={styles.title}>Welcome To Contacts</Text>
         <Text style={styles.subTitle}>Register</Text>
+        {error && <Text style={styles.error}>{error.data[0]}</Text>}
         <View style={styles.form}>
           <Input
             label="Username"
@@ -63,8 +71,8 @@ const SignUpComponent = ({onChange, onSubmit, form, errors}) => {
           <CustomButton
             secondary
             title="Submit"
-            loading={false}
-            disabled={false}
+            loading={loading}
+            disabled={loading}
             onPress={onSubmit}
           />
         </View>

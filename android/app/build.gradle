@@ -1,5 +1,10 @@
 apply plugin: "com.android.application"
 
++ project.ext.envConfigFiles = [
++   productiondebug: ".env",
++ ]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
 

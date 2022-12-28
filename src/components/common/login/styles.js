@@ -35,4 +35,11 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginTop: 20,
   },
+  error: {
+    textAlign: 'center',
+    fontSize: 17,
+    color: 'red',
+    marginVertical: 12,
+    textTransform: 'uppercase',
+  },
 });
